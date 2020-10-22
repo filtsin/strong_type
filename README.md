@@ -20,9 +20,19 @@ foo(height, width); // wrong order => Compiles
 
 ```c++
 #include <strong_type/strong_type.hpp>
+using width_t = strong_type<int, struct width_tag>;
+auto a = width_t { 4 };
+auto b = width_t { 5 };
+// All operators are defined for underlying type
+auto result = a * b;
+auto result2 = a + b;
+```
 
-using width_t = strong_type<int>;
-using height_t = strong_type<int>;
+```c++
+#include <strong_type/strong_type.hpp>
+
+using width_t = strong_type<int, struct width_tag>;
+using height_t = strong_type<int, struct height_tag>;
 
 void foo(width_t width, height_t height) {
     . . .
@@ -41,8 +51,8 @@ You can overload some operators. For example if I want multiplication to return 
 ```c++
 struct Foo { int v; };
 
-using int_t = strong_type<int>;
-using foo_t = strong_type<Foo>;
+using int_t = strong_type<int, struct int_tag>;
+using foo_t = strong_type<Foo, struct foo_tag>;
 
 // std::is_same<decltype(int_t{ 1 } * int{ 2 }), int_t>::value
 
