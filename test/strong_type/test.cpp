@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 #include <strong_type/strong_type.hpp>
 
-using meter_t = strong_type<int>;
+using meter_t = strong_type<int, struct meter_tag>;
 
-using width_t = strong_type<meter_t>;
-using height_t = strong_type<meter_t>;
+using width_t = strong_type<meter_t, struct width_tag>;
+using height_t = strong_type<meter_t, struct height_tag>;
 
 struct rectangle {
 public:
@@ -34,8 +34,8 @@ TEST(basic, arithmetic) {
 }
 
 TEST(basic, arithmetic_transparent) {
-    using int_t = strong_type<int>;
-    using in_t = strong_type<int_t>;
+    using int_t = strong_type<int, struct int_tag>;
+    using in_t = strong_type<int_t, struct in_tag>;
 
     auto var1 = int_t { 4 };
     auto var2 = in_t { var1 };

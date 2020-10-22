@@ -7,7 +7,7 @@
 #include <utility>
 #include <iosfwd>
 
-template <typename T>
+template <typename T, typename UniqueTag>
 class strong_type {
 public:
     using underlying_t = typename std::remove_reference<T>::type;

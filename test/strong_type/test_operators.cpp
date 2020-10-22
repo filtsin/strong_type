@@ -4,17 +4,17 @@
 
 
 TEST(underly_type, underlying_t) {
-    using foo_t = strong_type<int>;
+    using foo_t = strong_type<int, struct foo_tag>;
     ASSERT_TRUE((std::is_same<decltype(std::declval<foo_t>().underlying()), int&>::value));
-    using bar_t = strong_type<int&>;
+    using bar_t = strong_type<int&, struct bar_tag>;
     ASSERT_TRUE((std::is_same<decltype(std::declval<bar_t>().underlying()), int&>::value));
-    using baz_t = strong_type<int&&>;
+    using baz_t = strong_type<int&&, struct baz_tag>;
     ASSERT_TRUE((std::is_same<decltype(std::declval<baz_t>().underlying()), int&>::value));
 }
 
-using int_t = strong_type<int>;
+using int_t = strong_type<int, struct int_tag>;
 struct Foo {};
-using foo_t = strong_type<Foo>;
+using foo_t = strong_type<Foo, struct foo_tag>;
 
 TEST(operators, compare_op) {
     bool v = strong_t::has_eq<const int_t&>::value;
